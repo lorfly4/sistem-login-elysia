@@ -74,6 +74,51 @@ app.post('/login', async ({ body, set }) => {
   });
 });
 
+
+app.post('/register', ({ body, set }) => {
+  const { username, password, nama, kelas } = body as { username: string, password: string, nama: string, kelas: string };
+
+  return new Promise((resolve, reject) => {
+    // Periksa apakah username sudah digunakan
+    connection.query(
+      'SELECT * FROM `users` WHERE `username` = ?',
+      [username],
+      (err, results: User[]) => {
+        if (err) {
+          set.status = 500;
+          reject({ error: err });
+          return;
+        }
+
+        if (results.length > 0) {
+          set.status = 400;
+          resolve({ message: 'Username already exists' });
+          return;
+        }
+
+        // Jika username belum digunakan, lakukan registrasi
+        connection.query(
+          'INSERT INTO `users` (`username`, `password`, `nama`, `kelas`) VALUES (?,?,?,?)',
+          [username, password, nama, kelas],
+          (err) => {
+            if (err) {
+              set.status = 500;
+              reject({ error: err });
+              return;
+            }
+
+            set.status = 201;
+            resolve({ message: 'Registration successful' });
+          }
+        );
+      }
+    );
+  });
+});
+
+
+
+
 app.listen(3000, () => {
   console.log('Server is running on port 3000')
 })
