@@ -31,6 +31,13 @@ interface User extends RowDataPacket {
   password: string
 }
 
+interface mapel extends RowDataPacket{
+  id: number
+  materi: string
+  status: string
+  summary: string
+}
+
 // Get all users
 app.get('/users', ({ set }) => {
   return new Promise((resolve, reject) => {
@@ -47,6 +54,49 @@ app.get('/users', ({ set }) => {
       }
     });
   });
+});
+
+app.get('/rpl', ({ set }) => {
+  return new Promise((resolve, reject) => {
+    connection.query('SELECT * FROM `rpl`', (err: QueryError | null, results: User[]) => {
+      if (err) {
+        set.status = 500;
+        reject({ error: err });
+      } else {
+        set.status = 200;
+        resolve({
+          message: 'Data berhasil diambil',
+          users: results
+        });
+      }
+    });
+  });
+});
+
+app.get('/rpl/:id', async ({ params, set }) => {
+  const { id } = params;
+
+  try {
+    // Query SQL untuk select data berdasarkan ID
+    const [rows] = await connection.promise().query<mapel[]>('SELECT * FROM rpl WHERE id = ?', [id]);
+
+    if (rows.length > 0) {
+      // Output data dari setiap baris
+      const data = rows[0];
+      set.status = 200;
+      return {
+        message: 'Data berhasil diambil',
+        data: data
+      };
+    } else {
+      set.status = 404;
+      return { message: 'Data tidak ditemukan' };
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    set.status = 500;
+    return { error: 'Terjadi kesalahan dalam server' };
+  }
 });
 
 // Login route
@@ -98,7 +148,7 @@ app.post('/register', ({ body, set }) => {
 
         // Jika username belum digunakan, lakukan registrasi
         connection.query(
-          'INSERT INTO `users` (`username`, `password`, `nama`, `kelas`) VALUES (?,?,?,?)',
+          'INSERT INTO `users` (`username`, `password`, `nama`, `kelas`) VALUES (?, ?, ?, ?)',
           [username, password, nama, kelas],
           (err) => {
             if (err) {
@@ -117,6 +167,144 @@ app.post('/register', ({ body, set }) => {
 });
 
 
+app.post('/inggris', ({ body, set }) => {
+  const { materi, status, summary } = body as { materi: string, status: string, summary: string };
+
+  return new Promise((resolve, reject) => {
+        connection.query(
+          'INSERT INTO `bahasa_inggris` (`materi`, `status`, `summary`) VALUES (?, ?, ?)',
+          [materi, status, summary],
+          (err) => {
+            if (err) {
+              set.status = 500;
+              reject({ error: err });
+              return;
+            }
+
+            set.status = 201;
+            resolve({ message: 'input berhasil' });
+          }
+        );
+      }
+    );
+  });
+
+
+  app.post('/rpl', ({ body, set }) => {
+    const { materi, status, summary } = body as { materi: string, status: string, summary: string };
+  
+    return new Promise((resolve, reject) => {
+          connection.query(
+            'INSERT INTO `rpl` (`materi`, `status`, `summary`) VALUES (?, ?, ?)',
+            [materi, status, summary],
+            (err) => {
+              if (err) {
+                set.status = 500;
+                reject({ error: err });
+                return;
+              }
+  
+              set.status = 201;
+              resolve({ message: 'input berhasil' });
+            }
+          );
+        }
+      );
+    });
+
+
+    app.post('/ipa', ({ body, set }) => {
+      const { materi, status, summary } = body as { materi: string, status: string, summary: string };
+    
+      return new Promise((resolve, reject) => {
+            connection.query(
+              'INSERT INTO `ipa` (`materi`, `status`, `summary`) VALUES (?, ?, ?)',
+              [materi, status, summary],
+              (err) => {
+                if (err) {
+                  set.status = 500;
+                  reject({ error: err });
+                  return;
+                }
+    
+                set.status = 201;
+                resolve({ message: 'input berhasil' });
+              }
+            );
+          }
+        );
+      });
+
+
+      app.post('/pkk', ({ body, set }) => {
+        const { materi, status, summary } = body as { materi: string, status: string, summary: string };
+      
+        return new Promise((resolve, reject) => {
+              connection.query(
+                'INSERT INTO `pkk` (`materi`, `status`, `summary`) VALUES (?, ?, ?)',
+                [materi, status, summary],
+                (err) => {
+                  if (err) {
+                    set.status = 500;
+                    reject({ error: err });
+                    return;
+                  }
+      
+                  set.status = 201;
+                  resolve({ message: 'input berhasil' });
+                }
+              );
+            }
+          );
+        });
+
+
+        app.post('/pendidikan_agama', ({ body, set }) => {
+          const { materi, status, summary } = body as { materi: string, status: string, summary: string };
+        
+          return new Promise((resolve, reject) => {
+                connection.query(
+                  'INSERT INTO `pendidikan_agama` (`materi`, `status`, `summary`) VALUES (?, ?, ?)',
+                  [materi, status, summary],
+                  (err) => {
+                    if (err) {
+                      set.status = 500;
+                      reject({ error: err });
+                      return;
+                    }
+        
+                    set.status = 201;
+                    resolve({ message: 'input berhasil' });
+                  }
+                );
+              }
+            );
+          });
+
+
+          app.post('/matematika', ({ body, set }) => {
+            const { materi, status, summary } = body as { materi: string, status: string, summary: string };
+          
+            return new Promise((resolve, reject) => {
+                  connection.query(
+                    'INSERT INTO `matematika` (`materi`, `status`, `summary`) VALUES (?, ?, ?)',
+                    [materi, status, summary],
+                    (err) => {
+                      if (err) {
+                        set.status = 500;
+                        reject({ error: err });
+                        return;
+                      }
+          
+                      set.status = 201;
+                      resolve({ message: 'input berhasil' });
+                    }
+                  );
+                }
+              );
+            });
+
+            
 
 
 app.listen(3000, () => {
