@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Jun 2024 pada 15.59
+-- Waktu pembuatan: 21 Jun 2024 pada 06.59
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -34,6 +34,14 @@ CREATE TABLE `bahasa_inggris` (
   `summary` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data untuk tabel `bahasa_inggris`
+--
+
+INSERT INTO `bahasa_inggris` (`id`, `materi`, `status`, `summary`) VALUES
+(1, 'speak', 'hadir', 'ngomong bahasa inggris'),
+(2, 'react-native', 'hadir', 'belajar dong');
+
 -- --------------------------------------------------------
 
 --
@@ -59,6 +67,13 @@ CREATE TABLE `ipa` (
   `status` text NOT NULL,
   `summary` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data untuk tabel `ipa`
+--
+
+INSERT INTO `ipa` (`id`, `materi`, `status`, `summary`) VALUES
+(1, 'react-native', 'hadir', 'belajar dong');
 
 -- --------------------------------------------------------
 
@@ -98,6 +113,13 @@ CREATE TABLE `pendidikan_agama` (
   `summary` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data untuk tabel `pendidikan_agama`
+--
+
+INSERT INTO `pendidikan_agama` (`id`, `materi`, `status`, `summary`) VALUES
+(1, 'react-native', 'hadir', 'belajar dong');
+
 -- --------------------------------------------------------
 
 --
@@ -111,6 +133,13 @@ CREATE TABLE `pkk` (
   `summary` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Dumping data untuk tabel `pkk`
+--
+
+INSERT INTO `pkk` (`id`, `materi`, `status`, `summary`) VALUES
+(1, 'react-native', 'hadir', 'belajar dong');
+
 -- --------------------------------------------------------
 
 --
@@ -123,6 +152,13 @@ CREATE TABLE `rpl` (
   `status` text NOT NULL,
   `summary` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data untuk tabel `rpl`
+--
+
+INSERT INTO `rpl` (`id`, `materi`, `status`, `summary`) VALUES
+(1, 'react-native', 'hadir', 'belajar dong');
 
 -- --------------------------------------------------------
 
@@ -234,7 +270,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `bahasa_inggris`
 --
 ALTER TABLE `bahasa_inggris`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `history`
@@ -246,7 +282,7 @@ ALTER TABLE `history`
 -- AUTO_INCREMENT untuk tabel `ipa`
 --
 ALTER TABLE `ipa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `mapel`
@@ -258,19 +294,19 @@ ALTER TABLE `mapel`
 -- AUTO_INCREMENT untuk tabel `pendidikan_agama`
 --
 ALTER TABLE `pendidikan_agama`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `pkk`
 --
 ALTER TABLE `pkk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `rpl`
 --
 ALTER TABLE `rpl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `subjects`
