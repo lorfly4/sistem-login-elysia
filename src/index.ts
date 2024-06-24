@@ -295,6 +295,4 @@ app.post('/inggris', ({ body, set }) => {
             
 
 
-app.listen() => {
-  console.log('Server is running on port 3000')
-}
+app.listen();
