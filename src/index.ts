@@ -8,9 +8,10 @@ dotenv.config()
 // Create MySQL connection
 const connection = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "",
-  database: "testing"
+  user: "bagusbim_root",
+  password: "Akugataumales1@",
+  database: "bagusbim_testing",
+  port: "3306"
 })
 
 // Handle connection error
@@ -294,6 +295,6 @@ app.post('/inggris', ({ body, set }) => {
             
 
 
-app.listen(3000, () => {
+app.listen() => {
   console.log('Server is running on port 3000')
-})
+}
